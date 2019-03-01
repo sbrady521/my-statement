@@ -1,7 +1,6 @@
 ### AWS
 * **Database** - S3
 * **Distributed Compute** - Lambda
-* **Server Compute** - EC2
 
 ### React Only
 * **React State Handling** - Mobx
@@ -15,3 +14,14 @@
 * **Integration Testing** - Puppeteer
 * **Assertion Library** - Mocha
 * **Data Structure manipulation** - Lodash
+
+### TODO
+* Mockup frontend design
+* Create frontend code from dummy data
+* Set up skeleton testing framework
+  * Mocha for backend
+  * Jest for frontend using puppeteer
+  * Look into Enzyme for component testing
+* Watch the rest of the udemy tutorials
+* Set up mobx stores for front end
+* Work out what to do with DB based on udemy tutorials 

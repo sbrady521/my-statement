@@ -1,42 +1,30 @@
-import React from 'react';
-import StatementTypes from '../types/StatementTypes';
-import { Paper, Typography, Grid, withStyles} from '@material-ui/core';
-import statementStyles from '../Styles/statementStyles';
+import React from 'react'
+import { Paper, Typography, Grid, withStyles } from '@material-ui/core'
+import statementStyles from '../styles/statementStyles'
+import { observer } from 'mobx-react'
+import StatementHeader from './StatementHeader';
+import FlowGrid from './FlowGrid'
 
-class Statement extends React.Component {
-    state = {}
-    render() {
-        const { classes } = this.props;
-        const type = this.props.type;
-        const title = type === StatementTypes.income ? "Income Statement" : "Balance Sheet";
-        const userData = this.props.user;
+const Statement = observer(class Statement extends React.Component {
+  render () {
+    const { classes } = this.props
+    const store = this.props.store
 
-        return (
-            <div className={classes.root}>
-                <Grid container spacing={40}>
-                    <Grid item xs={3}>
-                        <Typography >
-                            {userData.name}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={9}>
-                        <Typography>
-                            {title}
-                        </Typography>
-                    </Grid>
-                </Grid>
-                <Paper >
-                    <Grid container spacing={40}>
-                        <Grid item xs={2}>
-                            <Typography>
-                                beans
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            </div>
-        );
-    }
-}
+    return (
+      <div className={classes.root}>
+        <Paper >
+          <Grid container spacing={40}>
+            <Grid item xs={12}>
+              <StatementHeader type={this.props.type} />
+            </Grid>
+            <Grid item xs={12}>
+              <FlowGrid type={this.props.type} />
+            </Grid>
+          </Grid>
+        </Paper>
+      </div>
+    )
+  }
+})
 
-export default withStyles(statementStyles)(Statement);
+export default withStyles(statementStyles)(Statement)
