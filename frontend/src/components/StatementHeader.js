@@ -13,18 +13,25 @@ const style = theme => ({
 
 const StatementHeader = observer(function StatementHeader () {
   const { classes } = this.props
+  const data = this.props.info
   return (
     <Grid container className={classes.header} justify='space-between' spacing={0}>
-      <Grid item xs={3}>
+      <Grid item xs={7}>
         <Typography component='h6' variant='h6'>
-          {store.user}
+          {data.user}
         </Typography>
       </Grid>
       <Grid item xs={5}>
         <Typography component='h4' variant='h4'>
-          Income Statement
+          {data.statementTitle}
         </Typography>
       </Grid>
+      <Grid container justify='flex-end' spacing={0}>
+        <Grid item xs={5}>
+          {data.statementDate}
+        </Grid>
+      </Grid>
+
     </Grid>
   )
 })

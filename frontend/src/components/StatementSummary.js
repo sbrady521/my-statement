@@ -1,7 +1,6 @@
 
 import { Typography, Grid, withStyles } from '@material-ui/core'
 import { observer } from 'mobx-react'
-import store from '../stores/StatementStore'
 import React from 'react'
 
 const style = theme => ({
