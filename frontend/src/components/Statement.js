@@ -5,6 +5,7 @@ import StatementHeader from './StatementHeader'
 import FinancialGrid from './FinancialGrid'
 import StatementSummary from './StatementSummary'
 import store from '../stores/StatementStore'
+import AddIcon from '@material-ui/icons/Add'
 
 const style = theme => ({
   root: {
@@ -15,6 +16,16 @@ const style = theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     padding: 50
+  },
+  divider: {
+    marginTop: 30,
+    marginBottom: 30
+  },
+  icon: {
+    color: '#DDD',
+    '&:hover': {
+      color: '#64b5f6'
+    }
   }
 })
 
@@ -24,25 +35,38 @@ const IncomeStatement = observer(class IncomeStatement extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <Grid container spacing={40}>
+        <Grid container justify='center' spacing={0}>
           <Grid item xs={12}>
             <StatementHeader info={store} />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider className={classes.divider} />
           </Grid>
           {
             store.financialGrids.map(grid => (
               <Grid key={grid.title} item xs={12}>
                 <Grid item xs={12}>
-                  <Divider />
+                  <FinancialGrid gridData={grid} />
                 </Grid>
                 <Grid item xs={12}>
-                  <FinancialGrid gridData={grid} />
+                  <Divider className={classes.divider} />
                 </Grid>
               </Grid>
             ))
           }
+
+          <Grid item xs={1}>
+            <AddIcon className={classes.icon} />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
+
           <Grid item xs={12}>
             <StatementSummary total={this.getGridTotals()} />
           </Grid>
+
         </Grid>
       </Paper>
     )
@@ -50,7 +74,7 @@ const IncomeStatement = observer(class IncomeStatement extends React.Component {
 
   getGridTotals () {
     let sum = 0
-    for (let i = 0 ; i < store.financialGrids.length ; i++) {
+    for (let i = 0; i < store.financialGrids.length; i++) {
       sum += store.financialGrids[i].total
     }
     return sum

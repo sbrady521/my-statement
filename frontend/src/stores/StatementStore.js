@@ -1,28 +1,20 @@
 import { decorate, observable, computed } from 'mobx'
 import FinancialGridStore from './FinancialGridStore'
-const dummyFlow = {
-      name: "Dolby",
-      amount: 3778 }
 
-const inflows = new FinancialGridStore
-inflows.title = "Inflows"
-inflows.items.push(dummyFlow)
-inflows.items.push(dummyFlow)
-inflows.items.push(dummyFlow)
-inflows.items.push(dummyFlow)
+const defaultItem = {
+  name: 'Asset or Source',
+  amount: 0
+}
 
-const outflows = new FinancialGridStore
-outflows.title = "Outflows"
-outflows.items.push(dummyFlow)
-outflows.items.push(dummyFlow)
-outflows.items.push(dummyFlow)
-outflows.items.push(dummyFlow)
+const defaultGrid = new FinancialGridStore
+defaultGrid.title = 'Sub-grid Title'
+defaultGrid.items.push(defaultItem)
 
 class StatementStore {
   user = 'Your Name'
   statementTitle = 'Statement Title'
   statementDate = 'DD/MM/YYYY'
-  financialGrids = [inflows, outflows]
+  financialGrids = [defaultGrid]
 }
 
 decorate(StatementStore, {

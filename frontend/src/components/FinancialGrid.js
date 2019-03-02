@@ -4,10 +4,17 @@ import { observer } from 'mobx-react'
 import TitleRow from './TitleRow'
 import TotalRow from './TotalRow'
 import DataRow from './DataRow'
+import AddIcon from '@material-ui/icons/Add'
 
 const style = theme => ({
   root: {
     flexGrow: 1
+  },
+  icon: {
+    color: '#DDD',
+    '&:hover': {
+      color: '#64b5f6'
+    }
   }
 })
 
@@ -20,7 +27,7 @@ const FinancialGrid = observer(class FinancialGrid extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
+        <Grid container spacing={16}>
           <Grid item xs={12}>
             <TitleRow title={gridData.title} />
           </Grid>
@@ -31,6 +38,9 @@ const FinancialGrid = observer(class FinancialGrid extends React.Component {
               </Grid>
             ))
           }
+          <Grid item xs={12}>
+            <AddIcon className={classes.icon} />          
+          </Grid>
           <Grid item xs={12}>
             <TotalRow amount={gridData.total} />
           </Grid>
