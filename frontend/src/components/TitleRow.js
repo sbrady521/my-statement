@@ -1,8 +1,7 @@
+// Displays the title of a financial grid
 import { Typography, Grid, withStyles } from '@material-ui/core'
 import { observer } from 'mobx-react'
-import store from '../stores/StatementStore'
 import React from 'react'
-import FlowGrid from './FlowGrid';
 
 const style = theme => ({
   root: {
@@ -10,20 +9,19 @@ const style = theme => ({
   }
 })
 
-const IncomeGrid = observer(function IncomeGrid () {
+const TitleRow = observer(function dummy () {
   const { classes } = this.props
   return (
     <div className={classes.root}>
-      <Grid container spacing={40}>
+      <Grid container justify='flex-start' spacing={0}>
         <Grid item xs={12}>
-          <FlowGrid title='Inflows' />
-        </Grid>
-        <Grid item xs={12}>
-          <FlowGrid title='Outflows' />
+          <Typography component='h4' variant='h4'>
+            {this.props.title}
+          </Typography>
         </Grid>
       </Grid>
     </div>
   )
 })
 
-export default withStyles(style)(IncomeGrid)
+export default withStyles(style)(TitleRow)

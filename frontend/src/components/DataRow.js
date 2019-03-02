@@ -1,7 +1,5 @@
-
 import { Typography, Grid, withStyles } from '@material-ui/core'
 import { observer } from 'mobx-react'
-import store from '../stores/StatementStore'
 import React from 'react'
 
 const style = theme => ({
@@ -10,20 +8,20 @@ const style = theme => ({
   }
 })
 
-const dummy = observer(function dummy () {
+const DataRow = observer(function dummy () {
   const { classes } = this.props
-  const data = this.props.itemData
+  const data = this.props.data
   return (
     <div className={classes.root}>
-      <Grid container justify='space-between' spacing={40}>
-        <Grid item xs={6}>
+      <Grid container justify='space-between' spacing={0}>
+        <Grid item xs={2}>
           <Typography component='body'>
-            {data.source}
+            {data.name}
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={2}>
           <Typography component='body'>
-            {data.amount} 
+            {data.amount}
           </Typography>
         </Grid>
       </Grid>
@@ -31,4 +29,4 @@ const dummy = observer(function dummy () {
   )
 })
 
-export default withStyles(style)(dummy)
+export default withStyles(style)(DataRow)

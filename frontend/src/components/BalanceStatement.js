@@ -2,10 +2,10 @@ import React from 'react'
 import { Paper, Typography, Grid, withStyles } from '@material-ui/core'
 import statementStyles from '../styles/statementStyles'
 import { observer } from 'mobx-react'
-import StatementHeader from './StatementHeader';
+import StatementHeader from './StatementHeader'
 import FlowGrid from './FlowGrid'
 
-const Statement = observer(class Statement extends React.Component {
+const IncomeStatement = observer(class IncomeStatement extends React.Component {
   render () {
     const { classes } = this.props
     const store = this.props.store
@@ -27,4 +27,4 @@ const Statement = observer(class Statement extends React.Component {
   }
 })
 
-export default withStyles(statementStyles)(Statement)
+export default withStyles(statementStyles)(IncomeStatement)
