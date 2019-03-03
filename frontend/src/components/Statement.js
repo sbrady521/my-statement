@@ -84,7 +84,7 @@ const IncomeStatement = observer(class IncomeStatement extends React.Component {
     )
   }
 
-  addGrid() {
+  addGrid () {
     const defaultItem = {
       name: 'Asset or Source',
       amount: 0
@@ -99,10 +99,10 @@ const IncomeStatement = observer(class IncomeStatement extends React.Component {
     store.financialGrids.set(keyCounter++, defaultGrid)
   }
 
-  getGridTotals() {
+  getGridTotals () {
     let sum = 0
-    for (let i = 0; i < store.financialGrids.length; i++) {
-      sum += store.financialGrids[i].total
+    for (let [key, val] of store.financialGrids) {
+      sum += val.total
     }
     return sum
   }

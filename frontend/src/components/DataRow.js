@@ -33,7 +33,6 @@ const DataRow = observer(class DataRow extends React.Component {
               className={classes.textField}
               value={data.name}
               onChange={this.handleChange('name')}
-              margin='normal'
             />
           </Grid>
           <Grid item xs={1}>
@@ -42,7 +41,6 @@ const DataRow = observer(class DataRow extends React.Component {
               className={classes.textField}
               value={data.amount}
               onChange={this.handleChange('amount')}
-              margin='normal'
             />
           </Grid>
           <Grid item xs={1}>
