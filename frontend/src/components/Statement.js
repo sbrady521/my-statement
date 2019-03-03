@@ -59,7 +59,7 @@ const IncomeStatement = observer(class IncomeStatement extends React.Component {
       <Paper className={classes.root}>
         <Grid container justify='center' spacing={0}>
           <Grid item xs={12}>
-            <StatementHeader info={store} />
+            <StatementHeader data={store} />
           </Grid>
           <Grid item xs={12}>
             <Divider className={classes.divider} />

@@ -1,5 +1,5 @@
 // Displays the title of a financial grid
-import { Input, TextField, Typography, Grid, withStyles } from '@material-ui/core'
+import { InputBase, TextField, Typography, Grid, withStyles } from '@material-ui/core'
 import { observer } from 'mobx-react'
 import React from 'react'
 
@@ -20,13 +20,13 @@ const TitleRow = observer(class dummy extends React.Component {
       <div className={classes.root}>
         <Grid container justify='flex-start' spacing={0}>
           <Grid item xs={12}>
-            <Input
+            <InputBase
               id='title'
               className={classes.textField}
               value={data.title}
               onChange={this.handleChange('title')}
-              margin='normal'
             />
+
           </Grid>
         </Grid>
       </div>

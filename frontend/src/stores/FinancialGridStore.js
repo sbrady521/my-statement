@@ -8,13 +8,14 @@ class financialGridStore {
 
   get total () {
     let sum = 0
-    for(let i = 0 ; i < this.items.length ; i++) {
-      if(this.items[i].amount) {
-        sum += this.items[i].amount
-      } else if(this.items[i].title) {
-        sum += this.items[i].total
+    for (let [key, val] of this.items) {
+      if (!isNaN(val.amount) && val.amount !== '') {
+        sum += parseInt(val.amount)
+      } else if (val.title !== undefined) {
+        sum += val.total
       } else {
-        console.error('Encountered unrecognized grid item')
+        console.error('Encountered unrecognized grid item: ' + JSON.stringify(val))
+        console.log(val.amount)
       }
     }
     return sum
