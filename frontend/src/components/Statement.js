@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Divider, Paper, Typography, Grid, withStyles } from '@material-ui/core'
+import { IconButton, Button, Divider, Paper, Typography, Grid, withStyles } from '@material-ui/core'
+import FinancialGridStore from '../stores/FinancialGridStore'
 import { observer } from 'mobx-react'
 import StatementHeader from './StatementHeader'
 import FinancialGrid from './FinancialGrid'
@@ -29,9 +30,30 @@ const style = theme => ({
   }
 })
 
+let keyCounter = 0
+
 const IncomeStatement = observer(class IncomeStatement extends React.Component {
   render () {
     const { classes } = this.props
+
+    let grids = []
+    for (let [key, val] of store.financialGrids) {
+
+      const deleteSelf = () => {
+        store.financialGrids.delete(key)
+      }
+
+      grids.push(
+        <Grid key={key} item xs={12}>
+          <Grid item xs={12}>
+            <FinancialGrid deleteSelf={deleteSelf} gridData={val} />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
+        </Grid>
+      )
+    }
 
     return (
       <Paper className={classes.root}>
@@ -42,22 +64,12 @@ const IncomeStatement = observer(class IncomeStatement extends React.Component {
           <Grid item xs={12}>
             <Divider className={classes.divider} />
           </Grid>
-          {
-            store.financialGrids.map(grid => (
-              <Grid key={grid.title} item xs={12}>
-                <Grid item xs={12}>
-                  <FinancialGrid gridData={grid} />
-                </Grid>
-                <Grid item xs={12}>
-                  <Divider className={classes.divider} />
-                </Grid>
-              </Grid>
-            ))
-          }
 
-          <Grid item xs={1}>
+          {grids}
+
+          <IconButton onClick={this.addGrid.bind(this)} aria-label='add' >
             <AddIcon className={classes.icon} />
-          </Grid>
+          </IconButton>
 
           <Grid item xs={12}>
             <Divider className={classes.divider} />
@@ -72,7 +84,22 @@ const IncomeStatement = observer(class IncomeStatement extends React.Component {
     )
   }
 
-  getGridTotals () {
+  addGrid() {
+    const defaultItem = {
+      name: 'Asset or Source',
+      amount: 0
+    }
+
+    const defaultGrid = new FinancialGridStore()
+    defaultGrid.title = 'Sub-grid Title'
+    defaultGrid.items.set(-1, defaultItem)
+    this.financialGrids = new Map()
+    this.financialGrids.set(-1, defaultGrid)
+
+    store.financialGrids.set(keyCounter++, defaultGrid)
+  }
+
+  getGridTotals() {
     let sum = 0
     for (let i = 0; i < store.financialGrids.length; i++) {
       sum += store.financialGrids[i].total

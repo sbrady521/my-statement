@@ -1,10 +1,12 @@
 import { decorate, observable, computed } from 'mobx'
 
 class financialGridStore {
-  title = 'Title'
-  items = []
+  constructor () {
+    this.title = 'Title'
+    this.items = new Map()
+  }
 
-  get total() {
+  get total () {
     let sum = 0
     for(let i = 0 ; i < this.items.length ; i++) {
       if(this.items[i].amount) {

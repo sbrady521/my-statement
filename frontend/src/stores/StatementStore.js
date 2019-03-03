@@ -1,4 +1,4 @@
-import { decorate, observable, computed } from 'mobx'
+import { decorate, observable } from 'mobx'
 import FinancialGridStore from './FinancialGridStore'
 
 const defaultItem = {
@@ -6,22 +6,25 @@ const defaultItem = {
   amount: 0
 }
 
-const defaultGrid = new FinancialGridStore
-defaultGrid.title = 'Sub-grid Title'
-defaultGrid.items.push(defaultItem)
-
 class StatementStore {
-  user = 'Your Name'
-  statementTitle = 'Statement Title'
-  statementDate = 'DD/MM/YYYY'
-  financialGrids = [defaultGrid]
+  constructor () {
+    this.user = 'Your Name'
+    this.statementTitle = 'Statement Title'
+    this.statementDate = 'DD/MM/YYYY'
+
+    const defaultGrid = new FinancialGridStore()
+    defaultGrid.title = 'Sub-grid Title'
+    defaultGrid.items.set(-1, defaultItem)
+    this.financialGrids = new Map()
+    this.financialGrids.set(-1, defaultGrid)
+  }
 }
 
 decorate(StatementStore, {
   user: observable,
   statementTitle: observable,
   statementDate: observable,
-  financialGrids: observable,
+  financialGrids: observable
 })
 
-export default new StatementStore
+export default new StatementStore()
